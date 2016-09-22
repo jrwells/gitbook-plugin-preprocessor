@@ -63,7 +63,7 @@ module.exports = {
                     this.options.pluginsConfig,
                     this.options.pluginsConfig.scripts.finishBefore,
                     this.log,
-                    'Running finish:before scripts...'  );
+                    'Running finish:before scripts'  );
         },
 
         // This is called after everything else.
@@ -72,7 +72,7 @@ module.exports = {
                     this.options.pluginsConfig,
                     this.options.pluginsConfig.scripts.finish,
                     this.log,
-                    'Running finish scripts...'  );
+                    'Running finish scripts'  );
         }
     }
 };
