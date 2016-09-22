@@ -5,7 +5,7 @@ This a very simple GitBook Plugin that runs a set of scripts during the building
 
 ## How to use
 
-To add the preprocessor plugin in your book, add the `preprocessor` to the `book.json` for your book, and add the scripts you wish to run as configs in the `book.json` file.
+To add the preprocessor plugin in your book, add `preprocessor` to the `book.json` for your book, and add the scripts you wish to run as configs in the `book.json` file.
 
 Then install your plugins using `gitbook install`.
 
