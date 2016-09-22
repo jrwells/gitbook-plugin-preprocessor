@@ -28,6 +28,7 @@ module.exports = {
                     require(this.book.resolve(scriptdir + s));
                 }
             }
+            return page;
         },
 
         // This is called before outputting and indexing the page.
@@ -42,6 +43,7 @@ module.exports = {
                     require(this.book.resolve(scriptdir + s));
                 }
             }
+            return page;
         },
 
         // This is called after generating the pages, before copying assets, cover, ...
