@@ -11,6 +11,7 @@ module.exports = {
 
         // This is called after parsing the book, before generating output and pages.
         "init": function() {
+            scriptdir = this.options.pluginsConfig.scriptDir || scriptdir;
             if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.init) {
                 var initscripts = this.options.pluginsConfig.scripts.init;
                 for (s in initscripts) {
