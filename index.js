@@ -7,9 +7,9 @@ module.exports = {
 
         // This is called after parsing the book, before generating output and pages.
         "init": function() {
-            this.log.info.ln('Running init scripts...');
             scriptdir = this.options.pluginsConfig.scriptDir || scriptdir;
             if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.init) {
+                this.log.info.ln('Running init scripts...');
                 var initscripts = this.options.pluginsConfig.scripts.init;
                 for (var i = 0; i < initscripts.length; i++) {
                     var s = initscripts[i];
@@ -20,8 +20,8 @@ module.exports = {
 
         // This is called before running the templating engine on the page.
         "page:before": function(page) {
-            this.log.info.ln('Running page:before scripts...' , page);
             if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.pageBefore) {
+                this.log.info.ln('Running page:before scripts for: ' , page.title);
                 var pagebeforescripts = this.options.pluginsConfig.scripts.pageBefore;
                 for (var i = 0; i < pagebeforescripts.length; i++) {
                     var s = pagebeforescripts[i];
@@ -32,10 +32,12 @@ module.exports = {
 
         // This is called before outputting and indexing the page.
         "page": function(page) {
-            this.log.info.ln('Running page scripts...' , page);
             if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.page) {
+            this.log.info.ln('Running page scripts for: ' , page.title);
                 var pagescripts = this.options.pluginsConfig.scripts.page;
+                this.log.info.ln(pagescripts);
                 for (var i = 0; i < pagescripts.length; i++) {
+                    this.log.info.ln(pagescripts[i]);
                     var s = pagescripts[i];
                     require(this.book.resolve(scriptdir + s));
                 }
@@ -44,8 +46,8 @@ module.exports = {
 
         // This is called after generating the pages, before copying assets, cover, ...
         "finish:before": function() {
-            this.log.info.ln('Running finish:before scripts...');
             if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.finishBefore) {
+            this.log.info.ln('Running finish:before scripts...');
                 var finishbeforescripts = this.options.pluginsConfig.scripts.finishBefore;
                 for (var i = 0; i < finishbeforescripts.length; i++) {
                     var s = finishbeforescripts[i];
@@ -56,8 +58,8 @@ module.exports = {
 
         // This is called after everything else.
         "finish": function() {
-            this.log.info.ln('Running finish scripts...');
             if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.finish) {
+            this.log.info.ln('Running finish scripts...');
                 var finishscripts = this.options.pluginsConfig.scripts.finish;
                 for (var i = 0; i < finishscripts.length; i++) {
                     var s = finishscripts[i];
