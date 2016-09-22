@@ -2,7 +2,7 @@
     "name": "gitbook-plugin-preprocessor",
     "description": "Simple plugin that runs script(s) before and during book/page generation.",
     "main": "index.js",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "engines": {
         "gitbook": "*"
     },
