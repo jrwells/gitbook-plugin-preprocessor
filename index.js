@@ -1,21 +1,21 @@
 var scriptdir = './scripts';
 
-function hook(config, scriptsarray, log, logmessage) {
+function hook(book, config, scriptsarray, log, logmessage) {
     if (config && scriptsarray) {
         log.debug.ln(logmessage);
         for (var i = 0; i < scriptsarray.length; i++) {
             var s = scriptsarray[i];
-            require(this.book.resolve(scriptdir + s));
+            require(book.resolve(scriptdir + s));
         }
     }
 }
 
-function pageHook(page, config, scriptsarray, log, logmessage) {
+function pageHook(book, page, config, scriptsarray, log, logmessage) {
     if (config && scriptsarray) {
         log.debug.ln(logmessage, page);
         for (var i = 0; i < scriptsarray.length; i++) {
             var s = scriptsarray[i];
-            require(this.book.resolve(scriptdir + s));
+            require(book.resolve(scriptdir + s));
         }
     }
 }
@@ -28,7 +28,8 @@ module.exports = {
         // This is called after parsing the book, before generating output and pages.
         "init": function() {
             scriptdir = (this.options.pluginsConfig.scriptDir || scriptdir) + '/';
-            hook(   this.options.pluginsConfig,
+            hook(   this.book,
+                    this.options.pluginsConfig,
                     this.options.pluginsConfig.scripts.init,
                     this.log,
                     'Running init scripts'  );
@@ -36,7 +37,8 @@ module.exports = {
 
         // This is called before running the templating engine on the page.
         "page:before": function(page) {
-            pageHook(   page,
+            pageHook(   this.book,
+                        page,
                         this.options.pluginsConfig,
                         this.options.pluginsConfig.scripts.pageBefore,
                         this.log,
@@ -46,7 +48,8 @@ module.exports = {
 
         // This is called before outputting and indexing the page.
         "page": function(page) {
-            pageHook(   page,
+            pageHook(   this.book,
+                        page,
                         this.options.pluginsConfig,
                         this.options.pluginsConfig.scripts.page,
                         this.log,
@@ -56,7 +59,8 @@ module.exports = {
 
         // This is called after generating the pages, before copying assets, cover, ...
         "finish:before": function() {
-            hook(   this.options.pluginsConfig,
+            hook(   this.book,
+                    this.options.pluginsConfig,
                     this.options.pluginsConfig.scripts.finishBefore,
                     this.log,
                     'Running finish:before scripts...'  );
@@ -64,7 +68,8 @@ module.exports = {
 
         // This is called after everything else.
         "finish": function() {
-            hook(   this.options.pluginsConfig,
+            hook(   this.book,
+                    this.options.pluginsConfig,
                     this.options.pluginsConfig.scripts.finish,
                     this.log,
                     'Running finish scripts...'  );
