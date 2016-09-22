@@ -1,40 +1,40 @@
-GitBook Sample Plugin
+GitBook Script Preprocessor Plugin
 ==============
 
-This is a model for GitBook plugins.
+This a very simple GitBook Plugin that runs a set of scripts during the building of the GitBook.
 
-## How GitBook plugin works?
+## How to use
 
-A plugin for GitBook is a node package that can be published on [NPM](http://www.npmjs.org). It has to follow the name convention: `gitbook-plugin-*name*`.
+To add the preprocessor plugin in your book, add the `preprocessor` to the `book.json` for your book, and add the scripts you wish to run as configs in the `book.json` file.
 
-### package.json
-
-#### name
-
-The package name should begin with ```gitbook-plugin-```.
-
-Examples: `gitbook-plugin-mixpanel`, `gitbook-plugin-googleanalytics`.
-
-#### engine
-
-The package.json should contain a `engine` field using [the standard norm](https://www.npmjs.org/doc/json.html#engines).
+Then install your plugins using `gitbook install`.
 
 ```
-"engines": {
-    "gitbook": "*"
+{
+    "plugins": [
+    	"preprocessor@git+https://github.com/jrwells/gitbook-plugin-preprocessor.git"
+    ],
+    "pluginsConfig": {
+        "scripts": {
+            "init": [
+                "myinitscript.js"
+            ],
+            "pageBefore": [
+            	"mypagebeforescript.js"
+            ],
+            "page": [
+            	"mypagescript.js"
+            ],
+            "finishBefore": [
+            	"myfinishbeforescript.js"
+            ],
+            "finish": [
+            	"myfinishscript.js"
+            ]
+        },
+        "scriptDir": "./aNewScriptsDir"
+    }
 }
 ```
 
-For example if you want your plugin to supports only GitBook version supperior to 0.3.1:
-
-```
-"engines": {
-    "gitbook": ">=0.3.1"
-}
-```
-
-### entry point
-
-The plugin entry point should return an object with some metadata.
-
-
+If `scriptDir` is not set, the plugin looks in the `./scripts` directory by default.
