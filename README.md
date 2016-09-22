@@ -32,7 +32,7 @@ Then install your plugins using `gitbook install`.
             	"myfinishscript.js"
             ]
         },
-        "scriptDir": "./aNewScriptsDir"
+        "scriptDir": "./aNewScriptDir"
     }
 }
 ```
