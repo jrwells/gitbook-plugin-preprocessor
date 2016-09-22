@@ -1,4 +1,4 @@
-GitBook Script Preprocessor Plugin
+GitBook Preprocessor Plugin
 ==============
 
 This a very simple GitBook Plugin that runs a set of scripts during the building of the GitBook.
