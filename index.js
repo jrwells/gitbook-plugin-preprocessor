@@ -36,7 +36,7 @@ module.exports = {
 
         // This is called before running the templating engine on the page.
         "page:before": function(page) {
-            pageHook(   page
+            pageHook(   page,
                         this.options.pluginsConfig,
                         this.options.pluginsConfig.scripts.pageBefore,
                         this.log,
@@ -46,7 +46,7 @@ module.exports = {
 
         // This is called before outputting and indexing the page.
         "page": function(page) {
-            pageHook(   page
+            pageHook(   page,
                         this.options.pluginsConfig,
                         this.options.pluginsConfig.scripts.page,
                         this.log,
