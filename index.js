@@ -35,6 +35,7 @@ module.exports = {
                 var pagescripts = this.options.pluginsConfig.scripts.page;
                 for (var i = 0; i < pagescripts.length; i++) {
                     var s = pagescripts[i];
+                    require(this.book.resolve(scriptdir + s + filetype));
                 }
             }
         },
@@ -45,6 +46,7 @@ module.exports = {
                 var finishbeforescripts = this.options.pluginsConfig.scripts.finishBefore;
                 for (var i = 0; i < finishbeforescripts.length; i++) {
                     var s = finishbeforescripts[i];
+                    require(this.book.resolve(scriptdir + s + filetype));
                 }
             }
         },
@@ -55,6 +57,7 @@ module.exports = {
                 var finishscripts = this.options.pluginsConfig.scripts.finish;
                 for (var i = 0; i < finishscripts.length; i++) {
                     var s = finishscripts[i];
+                    require(this.book.resolve(scriptdir + s + filetype));
                 }
             }
         }
