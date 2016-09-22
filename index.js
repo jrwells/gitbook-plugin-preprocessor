@@ -1,84 +1,62 @@
+var scriptdir = './scripts/';
+var filetype = '.js';
+
 module.exports = {
-    // Extend website resources and html
-    website: {
-        assets: "./book",
-        js: [
-            "test.js"
-        ],
-        css: [
-            "test.css"
-        ],
-        html: {
-            "html:start": function() {
-                return "<!-- Start book "+this.options.title+" -->"
-            },
-            "html:end": function() {
-                return "<!-- End of book "+this.options.title+" -->"
-            },
+    book : {
 
-            "head:start": "<!-- head:start -->",
-            "head:end": "<!-- head:end -->",
-
-            "body:start": "<!-- body:start -->",
-            "body:end": "<!-- body:end -->"
-        }
     },
-
-    // Extend ebook resources and html
-    website: {
-        assets: "./book",
-        js: [
-            "test.js"
-        ],
-        css: [
-            "test.css"
-        ],
-        html: {
-            "html:start": function() {
-                return "<!-- Start book "+this.options.title+" -->"
-            },
-            "html:end": function() {
-                return "<!-- End of book "+this.options.title+" -->"
-            },
-
-            "head:start": "<!-- head:start -->",
-            "head:end": "<!-- head:end -->",
-
-            "body:start": "<!-- body:start -->",
-            "body:end": "<!-- body:end -->"
-        }
-    },
-
-    // Extend templating blocks
-    blocks: {
-        // Author will be able to write "{% myTag %}World{% endMyTag %}"
-        myTag: {
-            process: function(blk) {
-                return "Hello "+blk.body;
-            }
-        }
-    },
-
-    // Extend templating filters
-    filters: {
-        // Author will be able to write "{{ 'test'|myFilter }}"
-        myFilter: function(s) {
-            return "Hello "+s;
-        }
-    },
-
     // Hook process during build
     hooks: {
         // For all the hooks, this represent the current generator
 
-        // This is called before the book is generated
+        // This is called after parsing the book, before generating output and pages.
         "init": function() {
-            console.log("init!");
+            if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.init) {
+                var initscripts = this.options.pluginsConfig.scripts.init;
+                for (s in initscripts) {
+                    require(this.book.resolve(scriptdir + s + filetype));
+                }
+            }
         },
 
-        // This is called after the book generation
+        // This is called before running the templating engine on the page.
+        "page:before": function(page) {
+            if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.pageBefore) {
+                var pagebeforescripts = this.options.pluginsConfig.scripts.pageBefore;
+                for (s in pagebeforescripts) {
+                    require(this.book.resolve(scriptdir + s + filetype));
+                }
+            }
+        },
+
+        // This is called before outputting and indexing the page.
+        "page": function(page) {
+            if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.page) {
+                var pagescripts = this.options.pluginsConfig.scripts.page;
+                for (s in pagescripts) {
+                    require(this.book.resolve(scriptdir + s + filetype));
+                }
+            }
+        },
+
+        // This is called after generating the pages, before copying assets, cover, ...
+        "finish:before": function() {
+            if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.finishBefore) {
+                var finishbeforescripts = this.options.pluginsConfig.scripts.finishBefore;
+                for (s in finishbeforescripts) {
+                    require(this.book.resolve(scriptdir + s + filetype));
+                }
+            }
+        },
+
+        // This is called after everything else.
         "finish": function() {
-            console.log("finish!");
+            if (this.options.pluginsConfig && this.options.pluginsConfig.scripts.finish) {
+                var finishscripts = this.options.pluginsConfig.scripts.finish;
+                for (s in finishscripts) {
+                    require(this.book.resolve(scriptdir + s + filetype));
+                }
+            }
         }
     }
 };
