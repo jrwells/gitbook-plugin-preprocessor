@@ -1,5 +1,4 @@
 var scriptdir = './scripts/';
-var filetype = '.js';
 
 module.exports = {
     // Hook process during build
@@ -13,7 +12,7 @@ module.exports = {
                 var initscripts = this.options.pluginsConfig.scripts.init;
                 for (var i = 0; i < initscripts.length; i++) {
                     var s = initscripts[i];
-                    require(this.book.resolve(scriptdir + s + filetype));
+                    require(this.book.resolve(scriptdir + s));
                 }
             }
         },
@@ -24,7 +23,7 @@ module.exports = {
                 var pagebeforescripts = this.options.pluginsConfig.scripts.pageBefore;
                 for (var i = 0; i < pagebeforescripts.length; i++) {
                     var s = pagebeforescripts[i];
-                    require(this.book.resolve(scriptdir + s + filetype));
+                    require(this.book.resolve(scriptdir + s));
                 }
             }
         },
@@ -35,7 +34,7 @@ module.exports = {
                 var pagescripts = this.options.pluginsConfig.scripts.page;
                 for (var i = 0; i < pagescripts.length; i++) {
                     var s = pagescripts[i];
-                    require(this.book.resolve(scriptdir + s + filetype));
+                    require(this.book.resolve(scriptdir + s));
                 }
             }
         },
@@ -46,7 +45,7 @@ module.exports = {
                 var finishbeforescripts = this.options.pluginsConfig.scripts.finishBefore;
                 for (var i = 0; i < finishbeforescripts.length; i++) {
                     var s = finishbeforescripts[i];
-                    require(this.book.resolve(scriptdir + s + filetype));
+                    require(this.book.resolve(scriptdir + s));
                 }
             }
         },
@@ -57,7 +56,7 @@ module.exports = {
                 var finishscripts = this.options.pluginsConfig.scripts.finish;
                 for (var i = 0; i < finishscripts.length; i++) {
                     var s = finishscripts[i];
-                    require(this.book.resolve(scriptdir + s + filetype));
+                    require(this.book.resolve(scriptdir + s));
                 }
             }
         }
