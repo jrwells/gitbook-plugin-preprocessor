@@ -1,11 +1,11 @@
-var scriptdir = './scripts';
+var scriptsdir = './scripts';
 
 function hook(book, config, scriptsarray, log, logmessage) {
     if (config && scriptsarray) {
         log.debug.ln(logmessage);
         for (var i = 0; i < scriptsarray.length; i++) {
             var s = scriptsarray[i];
-            require(book.resolve(scriptdir + s));
+            require(book.resolve(scriptsdir + s));
         }
     }
 }
@@ -15,7 +15,7 @@ function pageHook(book, page, config, scriptsarray, log, logmessage) {
         log.debug.ln(logmessage, page);
         for (var i = 0; i < scriptsarray.length; i++) {
             var s = scriptsarray[i];
-            require(book.resolve(scriptdir + s));
+            require(book.resolve(scriptsdir + s));
         }
     }
 }
@@ -27,7 +27,7 @@ module.exports = {
 
         // This is called after parsing the book, before generating output and pages.
         "init": function() {
-            scriptdir = (this.options.pluginsConfig.scriptDir || scriptdir) + '/';
+            scriptsdir = (this.options.pluginsConfig.scriptsDir || scriptsdir) + '/';
             hook(   this.book,
                     this.options.pluginsConfig,
                     this.options.pluginsConfig.scripts.init,

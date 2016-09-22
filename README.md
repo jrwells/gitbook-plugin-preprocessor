@@ -32,9 +32,9 @@ Then install your plugins using `gitbook install`.
             	"myfinishscript.js"
             ]
         },
-        "scriptDir": "./aNewScriptDir"
+        "scriptsDir": "./aNewScriptsDir"
     }
 }
 ```
 
-If `scriptDir` is not set, the plugin looks in the `./scripts` directory by default.
+If `scriptsDir` is not set, the plugin looks in the `./scripts` directory by default.
