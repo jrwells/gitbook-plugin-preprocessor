@@ -20,10 +20,39 @@ function pageHook(book, page, config, scriptsarray, log, logmessage) {
     }
 }
 
+function summaryHook(book, summary, config, scriptsarray, log, logmessage) {
+    if (config && scriptsarray) {
+        log.debug.ln(logmessage, summary);
+        for (var i = 0; i < scriptsarray.length; i++) {
+            var s = scriptsarray[i];
+            require(book.resolve(scriptsdir + s));
+        }
+    }
+}
+
 module.exports = {
     // Hook process during build
     hooks: {
         // For all the hooks, this represent the current generator
+
+        "summary:before": function(summary) {
+            scriptsdir = (this.options.pluginsConfig.scriptsDir || scriptsdir) + '/';
+            hook(   this.book,
+                    summary,
+                    this.options.pluginsConfig,
+                    this.options.pluginsConfig.scripts.summaryBefore
+                    'Running summary:before scripts on: ');
+            return summary;
+        },
+
+        "summary:after": function(summary) {
+            hook(   this.book,
+                    summary,
+                    this.options.pluginsConfig,
+                    this.options.pluginsConfig.scripts.summaryBefore
+                    'Running summary:after scripts on: ');
+            return summary;
+        },
 
         // This is called after parsing the book, before generating output and pages.
         "init": function() {
