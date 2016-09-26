@@ -37,20 +37,20 @@ module.exports = {
 
         "summary:before": function(summary) {
             scriptsdir = (this.options.pluginsConfig.scriptsDir || scriptsdir) + '/';
-            hook(   this.book,
-                    summary,
-                    this.options.pluginsConfig,
-                    this.options.pluginsConfig.scripts.summaryBefore,
-                    'Running summary:before scripts on: ');
+            summaryHook(   this.book,
+                            summary,
+                            this.options.pluginsConfig,
+                            this.options.pluginsConfig.scripts.summaryBefore,
+                            'Running summary:before scripts on: ');
             return summary;
         },
 
         "summary:after": function(summary) {
-            hook(   this.book,
-                    summary,
-                    this.options.pluginsConfig,
-                    this.options.pluginsConfig.scripts.summaryAfter,
-                    'Running summary:after scripts on: ');
+            summaryHook(   this.book,
+                            summary,
+                            this.options.pluginsConfig,
+                            this.options.pluginsConfig.scripts.summaryAfter,
+                            'Running summary:after scripts on: ');
             return summary;
         },
 
