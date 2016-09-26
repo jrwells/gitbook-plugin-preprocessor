@@ -49,7 +49,7 @@ module.exports = {
             hook(   this.book,
                     summary,
                     this.options.pluginsConfig,
-                    this.options.pluginsConfig.scripts.summaryBefore
+                    this.options.pluginsConfig.scripts.summaryAfter
                     'Running summary:after scripts on: ');
             return summary;
         },
