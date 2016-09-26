@@ -37,7 +37,7 @@ module.exports = {
 
         "summary:before": function(summary) {
             scriptsdir = (this.options.pluginsConfig.scriptsDir || scriptsdir) + '/';
-            summaryHook(   this.book,
+            summaryHook(    this.book,
                             summary,
                             this.options.pluginsConfig,
                             this.options.pluginsConfig.scripts.summaryBefore,
@@ -46,7 +46,7 @@ module.exports = {
         },
 
         "summary:after": function(summary) {
-            summaryHook(   this.book,
+            summaryHook(    this.book,
                             summary,
                             this.options.pluginsConfig,
                             this.options.pluginsConfig.scripts.summaryAfter,
