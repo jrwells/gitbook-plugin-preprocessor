@@ -6,7 +6,7 @@ function hook(book, config, scriptsarray, log, logmessage) {
         for (var i = 0; i < scriptsarray.length; i++) {
             var s = scriptsarray[i];
             delete require.cache[book.resolve(scriptsdir + s)];
-            require(book.resolve(scriptsdir + s));
+            require(book.resolve(scriptsdir + s)).run(book);
         }
     }
 }
@@ -17,7 +17,7 @@ function pageHook(book, page, config, scriptsarray, log, logmessage) {
         for (var i = 0; i < scriptsarray.length; i++) {
             var s = scriptsarray[i];
             delete require.cache[book.resolve(scriptsdir + s)];
-            require(book.resolve(scriptsdir + s));
+            require(book.resolve(scriptsdir + s)).run(book, page);
         }
     }
 }
