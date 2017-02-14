@@ -38,3 +38,26 @@ Then install your plugins using `gitbook install`.
 ```
 
 If `scriptsDir` is not set, the plugin looks in the `./scripts` directory by default.
+
+Your script must export the `run()` function and accept a `book` argument. For
+page hooks a `page` argument is also passed:
+
+`init` / `finish:before` / `finish` hooks:
+```
+module.exports = {
+    "run": function(book) {
+        console.dir(book);
+    }
+};
+```
+j
+`page:before` / `page` hooks:
+```
+module.exports = {
+    "run": function(book, page) {
+        console.dir(book);
+        console.dir(page);
+    }
+};
+```
+
